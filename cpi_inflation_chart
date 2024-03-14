@@ -1,0 +1,21 @@
+ 
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text":"CPI Inflation Index, 2015 = 100",
+    "subtitle": ["Consumer price inflation time series (MM23)", "Source: ONS"]},
+
+  "width": 400,
+  "height": 300,
+ 
+  "data": {"url": "https://raw.githubusercontent.com/agrwood92/agrwood92.github.io/main/series-140224.csv"},
+ 
+  "mark": "line",
+ 
+  "encoding": {
+    "x": {"field": "Year", "type": "temporal", "title":null},
+    "y": {"field": "Index", "type": "quantitative", "title":null},
+    "color": {"field": "CPI Index", "type": "nominal"}
+  }
+}

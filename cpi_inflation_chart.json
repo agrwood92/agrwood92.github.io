@@ -1,21 +1,30 @@
- 
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-
-  "title": {
-    "text":"CPI Inflation Index, 2015 = 100",
-    "subtitle": ["Consumer price inflation time series (MM23)", "Source: ONS"]},
-
-  "width": 400,
-  "height": 300,
- 
-  "data": {"url": "https://raw.githubusercontent.com/agrwood92/agrwood92.github.io/main/series-140224.csv"},
- 
-  "mark": "line",
- 
-  "encoding": {
-    "x": {"field": "Year", "type": "temporal", "title":null},
-    "y": {"field": "Index", "type": "quantitative", "title":null},
-    "color": {"field": "CPI Index", "type": "nominal"}
-  }
+  "layer": [
+    {
+      "data": {
+        "url": "https://api.economicsobservatory.com/gbr/infl?vega",
+        "format": {"type": "json"}
+      },
+      "mark": "line",
+      "transform": [{"filter": "year(datum.date)>2022"}],
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "value", "type": "quantitative"}
+      },
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/agrwood92/agrwood92.github.io/main/CPI_forecast.csv",
+        "format": {"type": "csv"}
+      },
+      "mark": "line",
+            "transform": [{"filter": "year(datum.Date)<2024"}],
+      "encoding": {
+        "x": {"field": "Date", "type": "temporal"},
+        "y": {"field": "Index_Forecast", "type": "quantitative"},
+        "color":{"value": "rgb(30,220,30)"}
+      }
+    }
+  ]
 }
